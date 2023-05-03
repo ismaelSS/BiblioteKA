@@ -36,6 +36,8 @@ THIRD_PARTY_APPS = [
 MY_APPS = [
     "users",
     "books",
+    "copies",
+
 ]
 DJANGO_APPS = [
     "django.contrib.admin",
