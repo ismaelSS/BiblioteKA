@@ -11,7 +11,7 @@ class BookSerializer(serializers.ModelSerializer):
             "title",
             "author",
             "pages",
-            "afferword",
+            "afterword",
             "publisher",
             "publication_date",
             "language",
