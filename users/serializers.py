@@ -22,6 +22,8 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data)
         return user
 
+        # safsadfsdfdsfsdf
+
     def update(self, instance: User, validated_data: dict) -> User:
         for key, value in validated_data.items():
             if key == 'password':
