@@ -2,7 +2,7 @@ from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from .models import User
 
-
+# werwerwer
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -33,5 +33,3 @@ class UserSerializer(serializers.ModelSerializer):
 
         return instance
 
-
-        # dsfsdfs
