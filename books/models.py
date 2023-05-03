@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Book(models.Model):
-    title = models.TextField(max_length=100, min=3)
+    title = models.TextField(max_length=100)
     author = models.TextField(max_length=100)
     pages = models.IntegerField()
     afferword = models.TextField()
