@@ -19,7 +19,7 @@ class BookSerializer(serializers.ModelSerializer):
 
         extra_kwargs = {
             "pages": {"required": False},
-            "afferword":  {"required": False},
+            "afterword":  {"required": False},
             "publisher": {"required": False},
             "publication_date": {"required": False}
         }
