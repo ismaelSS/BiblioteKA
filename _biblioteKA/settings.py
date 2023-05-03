@@ -43,6 +43,7 @@ MY_APPS = [
     "users",
     "books",
     "followers"
+    "copies",
 ]
 DJANGO_APPS = [
     "django.contrib.admin",
