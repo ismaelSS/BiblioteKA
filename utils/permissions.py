@@ -10,3 +10,7 @@ class IsAccountOwner(permissions.BasePermission):
 class IsAdminUser(permissions.BasePermission):
     def has_permission(self, request, view):
         return request.user.is_authenticated and request.user.is_admin
+
+class IsAccountOwnerOrAdmin(permissions.BasePermission):
+    def has_object_permission(self, request, view: View, obj: User) -> bool:
+        return request.user.is_authenticated and obj == request.user or request.user.is_authenticated and request.user.is_admin
