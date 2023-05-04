@@ -19,7 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
-        if validated_data['is_admin']:
+        if 'is_admin' in validated_data and validated_data['is_admin'] == True :
             user = User.objects.create_superuser(**validated_data)
         else:
             user = User.objects.create_user(**validated_data)
