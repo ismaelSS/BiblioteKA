@@ -1,7 +1,7 @@
 from .models import User
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from .serializers import UserSerializer
-from .permissions import IsAccountOwner
+from utils.permissions import IsAccountOwner
 from rest_framework import generics
 
 
