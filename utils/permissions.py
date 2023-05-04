@@ -30,3 +30,5 @@ class IsAdminOnlyGET(permissions.BasePermission):
     def has_permission(self, request, view) -> bool:
         if request.method == "GET":
             return request.user.is_authenticated and request.user.is_admin
+        else:
+            return True
