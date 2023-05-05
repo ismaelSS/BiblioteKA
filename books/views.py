@@ -4,7 +4,6 @@ from .serializers import BookSerializer
 from rest_framework.pagination import PageNumberPagination
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from utils.permissions import IsAdminUser
-import ipdb
 
 
 class BoookViews(generics.ListCreateAPIView, PageNumberPagination):
