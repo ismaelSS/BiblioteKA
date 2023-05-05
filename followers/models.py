@@ -9,5 +9,5 @@ class Follower(models.Model):
     class Meta:
         ordering = ("id",)
 
-    user = models.ForeignKey("users.User", models.CASCADE)
-    book = models.ForeignKey("books.Book", models.CASCADE)
+    user = models.ForeignKey("users.User", models.CASCADE, related_name="follower")
+    book = models.ForeignKey("books.Book", models.CASCADE, related_name="follower")
