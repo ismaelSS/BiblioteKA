@@ -49,6 +49,7 @@ class BookSerializer(serializers.ModelSerializer):
             author__iexact=validated_data.get("author"),
             language__iexact=validated_data.get("language"),
             edition__iexact=validated_data.get("edition"),
+            publisher__iexact=validated_data.get("publisher"),
         ).first()
 
         if get_book:
