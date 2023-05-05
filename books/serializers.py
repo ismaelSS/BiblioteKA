@@ -18,6 +18,7 @@ class BookSerializer(serializers.ModelSerializer):
             "publisher",
             "publication_date",
             "language",
+            "edition",
         ]
 
         extra_kwargs = {
@@ -25,6 +26,7 @@ class BookSerializer(serializers.ModelSerializer):
             "afterword": {"required": False},
             "publisher": {"required": False},
             "publication_date": {"required": False},
+            "edition": {"required": False},
         }
 
     def update(self, instance, validated_data: dict):
@@ -46,6 +48,8 @@ class BookSerializer(serializers.ModelSerializer):
             title__iexact=validated_data.get("title"),
             author__iexact=validated_data.get("author"),
             language__iexact=validated_data.get("language"),
+            edition__iexact=validated_data.get("edition"),
+            publisher__iexact=validated_data.get("publisher"),
         ).first()
 
         if get_book:
