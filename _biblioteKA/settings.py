@@ -36,6 +36,12 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=3)
+    
+}
+
 THIRD_PARTY_APPS = [
     "rest_framework",
 ]
