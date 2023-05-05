@@ -13,9 +13,9 @@ class IsAdminUser(permissions.BasePermission):
         return request.user.is_authenticated and request.user.is_admin
 
 
-class IsAccountOwnerOrAdminOnlyGetOrAccountOwner(permissions.BasePermission):
+class IsAccountOwnerAndPathOrAcconuntOwnerOrAdmin(permissions.BasePermission):
     def has_object_permission(self, request, view: View, obj: User) -> bool:
-        if request.method == "GET":
+        if request.method != 'PATCH':
             return (
                 request.user.is_authenticated
                 and obj == request.user
