@@ -1,9 +1,7 @@
-from django.shortcuts import render
 from .models import Copy
 from .serializers import CopySerializer
 from rest_framework import generics
-from utils.permissions import IsAccountOwnerOrAdminOnlyGetOrAccountOwner
-from utils.permissions import IsAccountOwner, IsAdminUser, IsAdminDELETE
+from utils.permissions import IsAdminDELETE
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.shortcuts import get_object_or_404
 from books.models import Book
