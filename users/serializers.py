@@ -6,10 +6,23 @@ from django.core import validators
 
 class UserSerializer(serializers.ModelSerializer):
     password_validators = [
+        validators.MinLengthValidator(8, message='The password must be at least 8 characters long.'),
         validators.RegexValidator(
-            r'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+=\[\]{};:\'",.<>/?\\|~-]).{8,}$',
-            'The password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long.'
-        )
+            r'[A-Z]',
+            message='The password should contain at least one uppercase character.'
+        ),
+        validators.RegexValidator(
+            r'[a-z]',
+            message='The password must contain at least one lowercase letter.'
+        ),
+        validators.RegexValidator(
+            r'[0-9]',
+            message='The password must contain at least one number.'
+        ),
+        validators.RegexValidator(
+            r'[!@#$%^&*()_+=\[\]{};:\'",.<>/?\\|~-]',
+            message='The password must contain at least one special character.'
+        ),
     ]
 
     password = serializers.CharField(write_only=True, validators=password_validators)
