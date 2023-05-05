@@ -1,14 +1,13 @@
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from .models import Follower
+from users.serializers import UserSerializer
+from books.serializers import BookSerializer
 
 
 class FollowerSerializer(serializers.ModelSerializer):
-    user = serializers.IntegerField(read_only=True)
-    book = serializers.IntegerField(read_only=True)
-
-    def create(self, validated_data):
-        return Follower.objects.create(**validated_data)
+    user = UserSerializer(required=False)
+    book = BookSerializer(required=False)
 
     class Meta:
         model = Follower
@@ -17,4 +16,3 @@ class FollowerSerializer(serializers.ModelSerializer):
             "user",
             "book",
         ]
-

@@ -32,3 +32,12 @@ class IsAdminOnlyGET(permissions.BasePermission):
             return request.user.is_authenticated and request.user.is_admin
         else:
             return True
+
+
+class IsAdminDELETE(permissions.BasePermission):
+    def has_permission(self, request, view) -> bool:
+        if request.method == "DELETE":
+            return request.user.is_authenticated and request.user.is_admin
+        else:
+            return True
+
