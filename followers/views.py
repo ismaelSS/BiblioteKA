@@ -1,17 +1,15 @@
-from django.shortcuts import render
 from rest_framework import generics
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from .models import Follower
 from books.models import Book
 from .serializers import FollowerSerializer
 from django.shortcuts import get_object_or_404
-from books.models import Book
-from utils.permissions import IsAccountOwnerOrAdminOnlyGetOrAccountOwner
+from utils.permissions import IsAccountOwnerAndPathOrAcconuntOwnerOrAdmin
 
 
 class FollowerView(generics.ListCreateAPIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAccountOwnerOrAdminOnlyGetOrAccountOwner]
+    permission_classes = [IsAccountOwnerAndPathOrAcconuntOwnerOrAdmin]
 
     queryset = Follower.objects.all()
     serializer_class = FollowerSerializer

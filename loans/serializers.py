@@ -3,11 +3,13 @@ from .models import Loan
 
 
 class LoanSerializer(serializers.ModelSerializer):
-    user_id = serializers.IntegerField(read_only=True)
-    copy_id = serializers.IntegerField(read_only=True)
+    def update(self, instance: Loan, validated_data: dict) -> Loan:
+        for key, value in validated_data.items():
+            setattr(instance, key, value)
 
-    def create(self, validated_data):
-        return Loan.objects.create(**validated_data)
+        instance.save()
+
+        return instance
 
     class Meta:
         model = Loan
@@ -17,5 +19,8 @@ class LoanSerializer(serializers.ModelSerializer):
             "copy_id",
             "allocated_at",
             "return_date",
-            "retuned_at"
+            "returned_at",
         ]
+        extra_kwargs = {
+            "return_date": {"read_only": True},
+        }
