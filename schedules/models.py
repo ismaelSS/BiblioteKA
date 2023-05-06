@@ -8,11 +8,14 @@ class FunctionsOptions(models.TextChoices):
 class Schedules(models.Model):
     execution_date = models.DateTimeField()
     function = models.CharField(max_length=20, choices=FunctionsOptions.choices)
+    user_id=models.IntegerField(null=True)
 
     loan = models.OneToOneField(
         "loans.Loan",
         on_delete=models.CASCADE,
-        related_name="schedule"
+        related_name="schedule",
+        null=True
     )
+
 
 
