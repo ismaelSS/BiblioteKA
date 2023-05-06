@@ -36,10 +36,6 @@ def schedule_unblock(user_id:int):
     )
 
 
-
-
-# def blockear_no_tempo()
-
 # checagem feita na data maxima de devolução do livro
 def check_retuned(loan_id: int):
     loan = Loan.objects.get(id=loan_id)
@@ -72,9 +68,20 @@ def devolution_event(loan_id: int):
                 ...
             else:
                 schedule_unblock(user_id)
-                ...
         else:
             ...
+    else:
+        if have_another_pending:
+            if is_blocked:
+                ...
+            else:
+                block_user(loan_id)
+        else:
+            if is_blocked:
+                schedule_unblock(user_id)
+            else:
+              block_user(loan.id)
+              schedule_unblock(user_id)
 
 
 
