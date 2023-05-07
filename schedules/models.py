@@ -17,5 +17,7 @@ class Schedules(models.Model):
         null=True
     )
 
+def __repr__(self):
+    return f'{self.function} | {self.execution_date}'
 
 

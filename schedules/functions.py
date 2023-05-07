@@ -3,19 +3,17 @@ from loans.models import Loan
 from .models import Schedules, FunctionsOptions
 from datetime import datetime, timedelta
 
-def block_user(loan_id:int):
-    loan = Loan.objects.get(id=loan_id)
+def block_user(loan:Loan):
     user = loan.user
     user.is_blocked = True
     user.save()
 
-def unblock_user(loan_id:int):
-    loan = Loan.objects.get(id=loan_id)
+def unblock_user(loan:Loan):
     user = loan.user
     user.is_blocked = False
     user.save()
 
-def unblock_user_for_id(user_id: int):
+def unblock_user_by_id(user_id: int):
     try:
         user = User.objects.get(id=user_id)
     except User.DoesNotExist:
@@ -37,9 +35,7 @@ def schedule_unblock(user_id:int):
 
 
 # checagem feita na data maxima de devolução do livro
-def check_retuned(loan_id: int):
-    loan = Loan.objects.get(id=loan_id)
-
+def check_retuned(loan:Loan):
     if not loan.returned_at:
         user = loan.user
         user.is_blocked = True
@@ -70,18 +66,18 @@ def devolution_event(loan_id: int):
                 schedule_unblock(user_id)
         else:
             ...
-    else:
-        if have_another_pending:
-            if is_blocked:
-                ...
-            else:
-                block_user(loan_id)
+    elif have_another_pending:
+        if is_blocked:
+            ...
         else:
-            if is_blocked:
-                schedule_unblock(user_id)
-            else:
-              block_user(loan.id)
-              schedule_unblock(user_id)
+            block_user(loan_id)
+    else:
+        if is_blocked:
+            schedule_unblock(user_id)
+        else:
+            block_user(loan.id)
+            schedule_unblock(user_id)
+        
 
 
 
