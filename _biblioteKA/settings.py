@@ -45,6 +45,7 @@ SIMPLE_JWT = {
 
 THIRD_PARTY_APPS = [
     "rest_framework",
+    'apscheduler',
 ]
 MY_APPS = [
     "users",
@@ -52,6 +53,7 @@ MY_APPS = [
     "books",
     "followers",
     "copies",
+    "schedules",
 ]
 DJANGO_APPS = [
     "django.contrib.admin",
