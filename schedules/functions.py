@@ -1,4 +1,3 @@
-from users.models import User
 from loans.models import Loan
 from .models import Schedules, FunctionsOptions
 from django.utils import timezone
@@ -8,54 +7,42 @@ import os
 dotenv.load_dotenv()
 
 
-def block_user(loan:Loan):
+def block_user(loan: Loan):
     user = loan.user
     user.is_blocked = True
     user.save()
 
-def unblock_user(loan:Loan):
+
+def unblock_user(loan: Loan):
     user = loan.user
     user.is_blocked = False
     user.save()
 
-# def unblock_user_by_id(user_id: int):
-#     try:
-#         user = User.objects.get(id=user_id)
-#     except User.DoesNotExist:
-#         user = None
 
-#     if user != None:
-#         user.is_blocked = False
-#         user.save()
-
-
-def schedule_unblock(loan:Loan):
-    schedule_time = timezone.now() + timezone.timedelta(days=int(os.getenv("UNBLOCK_PERIOD")))
+def schedule_unblock(loan: Loan):
+    schedule_time = timezone.now() + timezone.timedelta(
+        days=int(os.getenv("UNBLOCK_PERIOD"))
+    )
 
     Schedules.objects.create(
-        execution_date=schedule_time,
-        function=FunctionsOptions.UNBLOCK_USER,
-        loan=loan
+        execution_date=schedule_time, function=FunctionsOptions.UNBLOCK_USER, loan=loan
     )
 
 
-# checagem feita na data maxima de devolução do livro
-def check_retuned(loan:Loan):
+def check_retuned(loan: Loan):
     if not loan.returned_at:
         user = loan.user
         user.is_blocked = True
         user.save()
 
-def devolution_event(loan:Loan):
+
+def devolution_event(loan: Loan):
     user = loan.user
-    user_id = loan.user.id
 
     is_blocked = user.is_blocked
     user_loans_pending = user.loans.filter(returned_at__isnull=True)
     have_another_pending = user_loans_pending.count() >= 1
 
-
-    # redisponibilizando a copia
     copy = loan.copy
     copy.is_avaliable = True
     copy.save()
@@ -81,11 +68,3 @@ def devolution_event(loan:Loan):
         else:
             block_user(loan)
             schedule_unblock(loan)
-        
-
-
-
-
-
-
-
