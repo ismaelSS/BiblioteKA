@@ -27,4 +27,4 @@ urlpatterns = [
     path("api/", include("schedules.urls"))
 ]
 
-tasks.start()
+# tasks.start()
