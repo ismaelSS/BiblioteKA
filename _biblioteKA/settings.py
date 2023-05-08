@@ -38,9 +38,6 @@ if RENDER_EXTERNAL_HOSTNAME:
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
 # Application definition
 
 SIMPLE_JWT = {

@@ -21,7 +21,7 @@ def unblock_user(loan: Loan):
 
 def schedule_unblock(loan: Loan):
     schedule_time = timezone.now() + timezone.timedelta(
-        days=2
+        days=int(os.getenv("UNBLOCK_PERIOD"))
     )
 
     Schedules.objects.create(

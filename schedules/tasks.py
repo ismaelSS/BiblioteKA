@@ -29,5 +29,5 @@ def my_task():
 
 def start():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(my_task, 'interval', hours=1)
+    scheduler.add_job(my_task, 'interval', hours=int(os.getenv("SCRIPT_EXECUTION_INTERVAL")))
     scheduler.start()
