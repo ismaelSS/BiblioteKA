@@ -7,7 +7,6 @@ class FunctionsOptions(models.TextChoices):
 class Schedules(models.Model):
     execution_date = models.DateTimeField()
     function = models.CharField(max_length=20, choices=FunctionsOptions.choices)
-    user_id=models.IntegerField(null=True, blank=True)
 
     loan = models.OneToOneField(
         "loans.Loan",
