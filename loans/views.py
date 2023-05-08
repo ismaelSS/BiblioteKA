@@ -24,7 +24,7 @@ class LoanView(ListCreateAPIView):
         user = get_object_or_404(User, id=self.request.data.get("user_id"))
         copy = get_object_or_404(Copy, id=self.request.data.get("copy_id"))
 
-        scheduled_date = timezone.now() + timezone.timedelta(days=int(os.getenv("RETURN_PERIOD")))
+        scheduled_date = timezone.now() + timezone.timedelta(days=7)
 
         loan = serializer.save(user=user, copy=copy, return_date = scheduled_date)
 
