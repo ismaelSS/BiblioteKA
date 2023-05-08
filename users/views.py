@@ -12,7 +12,7 @@ class UserView(generics.ListCreateAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAdminOnlyGET]
 
-    queryset = User.objects.all()
+    queryset = User.objects.all().order_by('id')
     serializer_class = UserSerializer
 
 

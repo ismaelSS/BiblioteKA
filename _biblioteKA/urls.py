@@ -24,6 +24,7 @@ urlpatterns = [
     path("api/", include("followers.urls")),
     path("api/", include("books.urls")),
     path("api/", include("loans.urls")),
+    path("api/", include("schedules.urls"))
 ]
 
 tasks.start()
