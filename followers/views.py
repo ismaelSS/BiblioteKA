@@ -29,8 +29,11 @@ class FollowerView(generics.ListCreateAPIView):
     def get_queryset(self):
         queryset = super().get_queryset()
         user_id = self.request.query_params.get("user_id")
+        book_id = self.request.query_params.get("book_id")
         if user_id:
             queryset = queryset.filter(user_id=user_id)
+        if book_id:
+            queryset = queryset.filter(book_id=book_id)
         return queryset
 
 
