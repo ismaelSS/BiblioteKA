@@ -5,6 +5,7 @@ from books.models import Book
 from .serializers import FollowerSerializer
 from django.shortcuts import get_object_or_404
 from utils.permissions import IsAccountOwnerAndPathOrAcconuntOwnerOrAdmin
+from rest_framework.exceptions import PermissionDenied
 
 
 class FollowerView(generics.ListCreateAPIView):
@@ -24,3 +25,9 @@ class FollowerDetailView(generics.RetrieveDestroyAPIView):
     authentication_classes = [JWTAuthentication]
     queryset = Follower.objects.all()
     serializer_class = FollowerSerializer
+
+    def delete(self, request, *args, **kwargs):
+        follower = self.get_object()
+        if follower.user != request.user:
+            raise PermissionDenied("You are not allowed to unfollow this book.")
+        return self.destroy(request, *args, **kwargs)
