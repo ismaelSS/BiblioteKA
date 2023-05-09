@@ -7,7 +7,7 @@ class Loan(models.Model):
     returned_at = models.DateTimeField(null=True)
 
     user = models.ForeignKey(
-        "users.User", on_delete=models.PROTECT, related_name="loans"
+        "users.User", on_delete=models.CASCADE, related_name="loans"
     )
 
     copy = models.ForeignKey(
