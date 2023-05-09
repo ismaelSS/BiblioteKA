@@ -19,21 +19,23 @@ class LoanView(ListCreateAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAdminOrOnlyGET]
     serializer_class = LoanSerializer
+    queryset = Loan
 
     def perform_create(self, serializer) -> None:
         user = get_object_or_404(User, id=self.request.data.get("user_id"))
         copy = get_object_or_404(Copy, id=self.request.data.get("copy_id"))
 
-        scheduled_date = timezone.now() + timezone.timedelta(days=int(os.getenv("RETURN_PERIOD")))
+        scheduled_date = timezone.now() + timezone.timedelta(
+            days=int(os.getenv("RETURN_PERIOD"))
+        )
 
-        loan = serializer.save(user=user, copy=copy, return_date = scheduled_date)
+        loan = serializer.save(user=user, copy=copy, return_date=scheduled_date)
 
         Schedules.objects.create(
             execution_date=scheduled_date,
             function=FunctionsOptions.CHECK_RETURNED,
-            loan=loan
+            loan=loan,
         )
-
 
     def get_queryset(self):
         if self.request.user.is_superuser:
@@ -45,6 +47,7 @@ class LoanView(ListCreateAPIView):
             return Loan.objects.all()
 
         return Loan.objects.filter(user=self.request.user)
+
 
 class LoanDetailView(UpdateAPIView):
     authentication_classes = [JWTAuthentication]

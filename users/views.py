@@ -6,13 +6,16 @@ from utils.permissions import (
     IsAdminOnlyGET,
 )
 from rest_framework import generics
+import ipdb
+from loans.models import Loan
+from validation_erros.erros import ErrorForbidden
 
 
 class UserView(generics.ListCreateAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAdminOnlyGET]
 
-    queryset = User.objects.all().order_by('id')
+    queryset = User.objects.all().order_by("id")
     serializer_class = UserSerializer
 
 
@@ -24,3 +27,11 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
 
     lookup_url_kwarg = "user_id"
+
+    def perform_destroy(self, instance):
+        loans = Loan.objects.filter(returned_at=None, user=instance)
+        if not loans:
+            return instance.delete()
+        else:
+            response = {"message": "Solve your issues"}
+            raise ErrorForbidden(response)

@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Book
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
-from .erros import ConflictError
+from validation_erros.erros import ConflictError
 import ipdb
 
 
