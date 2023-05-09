@@ -11,7 +11,6 @@ from rest_framework.exceptions import PermissionDenied
 class FollowerView(generics.ListCreateAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAccountOwnerAndPathOrAcconuntOwnerOrAdmin]
-
     queryset = Follower.objects.all()
     serializer_class = FollowerSerializer
 
@@ -19,6 +18,13 @@ class FollowerView(generics.ListCreateAPIView):
         book_id = self.kwargs.get("pk")
         book = get_object_or_404(Book, id=book_id)
         return serializer.save(book=book, user_id=self.request.user.id)
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        user_id = self.request.query_params.get("user_id")
+        if user_id:
+            queryset = queryset.filter(user_id=user_id)
+        return queryset
 
 
 class FollowerDetailView(generics.RetrieveDestroyAPIView):
