@@ -8,6 +8,9 @@ from utils.permissions import IsAccountOwnerAndPathOrAcconuntOwnerOrAdmin
 from rest_framework.exceptions import PermissionDenied
 
 
+from rest_framework.exceptions import ValidationError
+
+
 class FollowerView(generics.ListCreateAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAccountOwnerAndPathOrAcconuntOwnerOrAdmin]
@@ -17,7 +20,11 @@ class FollowerView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         book_id = self.kwargs.get("pk")
         book = get_object_or_404(Book, id=book_id)
-        return serializer.save(book=book, user_id=self.request.user.id)
+        user_id = self.request.user.id
+
+        if Follower.objects.filter(book=book, user_id=user_id).exists():
+            raise ValidationError({"message":f"This user already follows this book."})
+        return serializer.save(book=book, user_id=user_id)
 
     def get_queryset(self):
         queryset = super().get_queryset()
