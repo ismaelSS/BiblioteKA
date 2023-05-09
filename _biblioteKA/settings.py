@@ -16,6 +16,7 @@ from django.core.management.utils import get_random_secret_key
 import dotenv
 from datetime import timedelta
 import dj_database_url
+import datetime
 
 
 dotenv.load_dotenv()
@@ -34,24 +35,20 @@ SECRET_KEY = os.getenv("SECRET_KEY") or get_random_secret_key()
 ALLOWED_HOSTS = []
 RENDER_EXTERNAL_HOSTNAME = os.getenv("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS +=[RENDER_EXTERNAL_HOSTNAME, "0.0.0.0"]
+    ALLOWED_HOSTS += [RENDER_EXTERNAL_HOSTNAME, "0.0.0.0"]
 
 DEBUG = True
-
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=3)
-    
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=3),
 }
 
 THIRD_PARTY_APPS = [
     "rest_framework",
-    'apscheduler',
+    "apscheduler",
 ]
 MY_APPS = [
     "users",
@@ -121,12 +118,13 @@ DATABASES = {
     }
 }
 
-DATABASE_URL = os.getenv('DATABASE_URL')
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 if DATABASE_URL:
     db_from_env = dj_database_url.config(
-        default=DATABASE_URL, conn_max_age=500, ssl_require=True)
-    DATABASES['default'].update(db_from_env)
+        default=DATABASE_URL, conn_max_age=500, ssl_require=True
+    )
+    DATABASES["default"].update(db_from_env)
     DEBUG = False
 
 if not DEBUG:
@@ -180,3 +178,7 @@ REST_FRAMEWORK = {
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
+
+JWT_AUTH = {
+    "JWT_EXPIRATION_DELTA": datetime.timedelta(hours=3),
+}
