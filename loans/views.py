@@ -40,7 +40,7 @@ class LoanView(ListCreateAPIView):
             raise ConflictError(response)
 
         scheduled_date = timezone.now() + timezone.timedelta(
-            days=int(os.getenv("RETURN_PERIOD"))
+            days=int(os.getenv("RETURN_PERIOD", "7"))
         )
 
         if scheduled_date.weekday() >= 5:

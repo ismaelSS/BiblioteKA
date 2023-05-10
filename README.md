@@ -11,12 +11,13 @@
     - [Instalando dependências](#34-instalando-dependências)
     - [Migrations](#35-migrations)
     - [Inicializar o servidor](#36-inicializar-o-servidor)
+- [Documentação das rotas](#4-documentação-das-rotas)
 
 ---
 
 ## 1. Visão Geral
 
-Visão geral do projeto, um pouco das tecnologias usadas.
+Um pouco das tecnologias usadas.
 
 - [Python](https://www.python.org/)
 - [Django](https://www.djangoproject.com/)
@@ -24,7 +25,7 @@ Visão geral do projeto, um pouco das tecnologias usadas.
 - [PostgreSQL](https://www.postgresql.org/)
 - [Advanced Python Scheduler](https://apscheduler.readthedocs.io/en/3.x/)
 
-A URL base da aplicação:
+URL base da aplicação:
 https://biblioteka-group18.onrender.com/
 
 ---
@@ -33,9 +34,9 @@ https://biblioteka-group18.onrender.com/
 [ Voltar para o topo ](#tabela-de-conteúdos)
 
 
-Diagrama ER da API definindo as relações entre as tabelas do banco de dados. (colocar imagem no repo)
+Diagrama ER da API definindo as relações entre as tabelas do banco de dados.
 
-![DER](DER_SP7_01.drawio.png)
+![DER](diagram.png)
 
 ---
 
@@ -70,10 +71,10 @@ Em seguida, crie um arquivo **.env**, copiando o formato do arquivo **.env.examp
 ```
 cp .env.example .env
 ```
-Seguindo os exemplos:
-Configure suas variáveis de ambiente com suas credenciais do Postgres e uma nova database da sua escolha.
-Configure quantos dias durará um empréstimo e quantos dias será o prazo de desbloqueio.
-Configure também o intervalo em horas de execução do script, os dias e horários de funcionamento da biblioteca. 
+Seguindo os exemplos presentes no .env.example:</br>
+Configure suas variáveis de ambiente com suas credenciais do Postgres e uma nova database da sua escolha.</br>
+Configure quantos dias durará um empréstimo e quantos dias será o prazo de desbloqueio.</br>
+Configure também o intervalo em horas de execução do script, os dias e horários de funcionamento da biblioteca.
 
 
 ### 3.4. Instalando dependências 
@@ -99,3 +100,10 @@ Por fim, utilize o seguinte comando para rodar o servidor localmente:
 ```bash
 python manage.py runserver
 ```
+
+## 4. Documentação das rotas
+[ Voltar para o topo ](#tabela-de-conteúdos)
+
+Link da documentação: 
+https://biblioteka-group18.onrender.com/api/docs/redoc/
+---
