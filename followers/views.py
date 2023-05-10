@@ -8,9 +8,7 @@ from utils.permissions import IsAccountOwnerAndPathOrAcconuntOwnerOrAdmin
 from drf_spectacular.utils import extend_schema
 from rest_framework.response import Response
 from books.models import Book
-from validation_erros.erros import ErrorNotFound, ErrorForbidden
-import ipdb
-from rest_framework.exceptions import PermissionDenied
+from validation_erros.erros import ErrorNotFound
 from rest_framework.exceptions import ValidationError
 
 
@@ -80,8 +78,8 @@ class FollowerView(generics.ListCreateAPIView, generics.DestroyAPIView):
         )
 
         if not follower:
-            response = {"detail": "You do not have permission to perform this action."}
-            raise ErrorForbidden(response, code=403)
+            response = {"detail": "Follow do not exists."}
+            raise ErrorNotFound(response, code=404)
 
         follower.delete()
 
