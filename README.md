@@ -16,7 +16,7 @@
 
 ## 1. Visão Geral
 
-Visão geral do projeto, um pouco das tecnologias usadas.
+Um pouco das tecnologias usadas.
 
 - [Python](https://www.python.org/)
 - [Django](https://www.djangoproject.com/)
@@ -24,7 +24,7 @@ Visão geral do projeto, um pouco das tecnologias usadas.
 - [PostgreSQL](https://www.postgresql.org/)
 - [Advanced Python Scheduler](https://apscheduler.readthedocs.io/en/3.x/)
 
-A URL base da aplicação:
+URL base da aplicação:
 https://biblioteka-group18.onrender.com/
 
 ---
@@ -33,9 +33,9 @@ https://biblioteka-group18.onrender.com/
 [ Voltar para o topo ](#tabela-de-conteúdos)
 
 
-Diagrama ER da API definindo as relações entre as tabelas do banco de dados. (colocar imagem no repo)
+Diagrama ER da API definindo as relações entre as tabelas do banco de dados.
 
-![DER](DER_SP7_01.drawio.png)
+![DER](diagram.png)
 
 ---
 
