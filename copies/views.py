@@ -8,7 +8,7 @@ from books.models import Book
 from drf_spectacular.utils import extend_schema
 
 
-class CopyView(generics.ListCreateAPIView, generics.RetrieveDestroyAPIView):
+class CopyView(generics.ListCreateAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAdminDELETE]
 
@@ -28,6 +28,7 @@ class CopyView(generics.ListCreateAPIView, generics.RetrieveDestroyAPIView):
         tags=["Rotas de copies"],
     )
     def get(self, request, *args, **kwargs):
+        self.queryset = Copy.objects.filter(book_id=kwargs.get("pk"))
         return super().get(request, *args, **kwargs)
 
     @extend_schema(
@@ -39,6 +40,14 @@ class CopyView(generics.ListCreateAPIView, generics.RetrieveDestroyAPIView):
     )
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)
+
+
+class CopyDetailView(generics.DestroyAPIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAdminDELETE]
+
+    queryset = Copy.objects.all()
+    serializer_class = CopySerializer
 
     @extend_schema(
         operation_id="Copy",

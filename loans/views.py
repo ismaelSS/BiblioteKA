@@ -43,6 +43,10 @@ class LoanView(ListCreateAPIView):
             days=int(os.getenv("RETURN_PERIOD"))
         )
 
+        if scheduled_date.weekday() >= 5:
+            days_until_monday = 7 - scheduled_date.weekday()
+            scheduled_date = scheduled_date + datetime.timedelta(days=days_until_monday)
+
         loan = serializer.save(
             user=user,
             copy=copy,
@@ -106,6 +110,9 @@ class LoanDetailView(UpdateAPIView):
         tags=["Rotas de loans"],
     )
     def patch(self, request, *args, **kwargs):
+        returned_at = request.data.get("returned_at", None)
+        if returned_at is None:
+            request.data["returned_at"] = timezone.now()
         update = self.partial_update(request, *args, **kwargs)
         loan = self.get_object()
         devolution_event(loan)
