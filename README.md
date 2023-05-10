@@ -8,9 +8,10 @@
     - [Criando ambiente virtual](#31-criando-ambiente-virtual)
     - [Ative seu venv](#32-ative-seu-venv)
     - [Variáveis de Ambiente](#33-variáveis-de-ambiente)
-    - [Instalando dependências](#34-instalando-dependências)
-    - [Migrations](#35-migrations)
-    - [Inicializar o servidor](#36-inicializar-o-servidor)
+    - [Instalando dependências](#34-criando-servidor)
+    - [Instalando dependências](#35-configurando-variaveis-de-ambiente)
+    - [Migrations](#36-migrations)
+    - [Inicializar o servidor](#37-inicializar-o-servidor)
 - [Documentação das rotas](#4-documentação-das-rotas)
 
 ---
@@ -65,7 +66,22 @@ source venv/bin/activate
 source venv/Scripts/activate
 ```
 
-### 3.3. Variáveis de Ambiente
+### 3.3. Instalando dependências 
+
+Instale as dependências com o comando:
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3.4. Criando servidor
+É necessario ter o postegreSQL instalado.
+Apos logar com seu usuario no psql digite o comando.
+```
+CREATE DATABASE _nome_do_banco_de_dados;
+```
+
+### 3.5. Variáveis de Ambiente
 
 Em seguida, crie um arquivo **.env**, copiando o formato do arquivo **.env.example**:
 ```
@@ -76,16 +92,7 @@ Configure suas variáveis de ambiente com suas credenciais do Postgres e uma nov
 Configure quantos dias durará um empréstimo e quantos dias será o prazo de desbloqueio.</br>
 Configure também o intervalo em horas de execução do script, os dias e horários de funcionamento da biblioteca.
 
-
-### 3.4. Instalando dependências 
-
-Instale as dependências com o comando:
-
-```bash
-pip install -r requirements.txt
-```
-
-### 3.5. Migrations 
+### 3.6. Migrations 
 
 Execute as migrations com o comando:
 
@@ -93,7 +100,7 @@ Execute as migrations com o comando:
 python manage.py migrate
 ```
 
-### 3.6. Inicializar o servidor 
+### 3.7. Inicializar o servidor 
 
 Por fim, utilize o seguinte comando para rodar o servidor localmente:
 
