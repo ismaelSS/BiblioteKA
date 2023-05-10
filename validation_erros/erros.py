@@ -9,3 +9,8 @@ class ConflictError(ValidationError):
 class ErrorForbidden(ValidationError):
     status_code = 403
     default_detail = "Request Declined"
+
+
+class ErrorNotFound(ValidationError):
+    status_code = 404
+    default_detail = "Not found"
