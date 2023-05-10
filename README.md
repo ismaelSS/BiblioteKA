@@ -8,7 +8,7 @@
     - [Criando ambiente virtual](#31-criando-ambiente-virtual)
     - [Ative seu venv](#32-ative-seu-venv)
     - [Variáveis de Ambiente](#33-variáveis-de-ambiente)
-    - [Instalando dependências](#34-criando-servidor)
+    - [Criando servidor](#34-criando-servidor)
     - [Instalando dependências](#35-configurando-variaveis-de-ambiente)
     - [Migrations](#36-migrations)
     - [Inicializar o servidor](#37-inicializar-o-servidor)
