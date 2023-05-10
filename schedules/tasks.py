@@ -31,8 +31,8 @@ def start():
     scheduler.add_job(
         my_task,
         "cron",
-        day_of_week=os.getenv("OPERATING-DAYS"),
-        hour=os.getenv("BUSSINESS-HOURS"),
+        day_of_week=os.getenv("OPERATING-DAYS", "mon-fri"),
+        hour=os.getenv("BUSSINESS-HOURS", "9-21"),
         minute=0,
     )
     scheduler.start()
