@@ -86,15 +86,3 @@ class FollowerView(generics.ListCreateAPIView, generics.DestroyAPIView):
         follower.delete()
 
         return Response(status=204)
-
-
-# class FollowerDetailView(generics.RetrieveDestroyAPIView):
-#     authentication_classes = [JWTAuthentication]
-#     queryset = Follower.objects.all()
-#     serializer_class = FollowerSerializer
-
-#     def delete(self, request, *args, **kwargs):
-#         follower = self.get_object()
-#         if follower.user != request.user:
-#             raise PermissionDenied("You are not allowed to unfollow this book.")
-#         return self.destroy(request, *args, **kwargs)
