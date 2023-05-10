@@ -49,6 +49,7 @@ SIMPLE_JWT = {
 THIRD_PARTY_APPS = [
     "rest_framework",
     "apscheduler",
+    "drf_spectacular",
 ]
 MY_APPS = [
     "users",
@@ -172,6 +173,7 @@ STATIC_URL = "static/"
 
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "PAGE_SIZE": 10,
 }
 
@@ -181,4 +183,14 @@ AUTH_USER_MODEL = "users.User"
 
 JWT_AUTH = {
     "JWT_EXPIRATION_DELTA": datetime.timedelta(hours=3),
+}
+
+# Spectacular
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "BibioteKA",
+    "DESCRIPTION": "Sistema de gerenciamento de bibliotecas",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    # OTHER SETTINGS
 }

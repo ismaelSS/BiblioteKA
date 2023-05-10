@@ -12,7 +12,8 @@ from django.utils import timezone
 import dotenv
 import os
 import ipdb
-import datetime
+from drf_spectacular.utils import extend_schema
+
 from validation_erros.erros import ConflictError, ErrorForbidden
 
 dotenv.load_dotenv()
@@ -72,6 +73,26 @@ class LoanView(ListCreateAPIView):
 
         return Loan.objects.filter(user=self.request.user)
 
+    @extend_schema(
+        operation_id="Loan",
+        summary="Lista todos os emprestimos",
+        description="Lista todos os emprestimos. Está rota está limitada, somente adiministradores tem accesso.",
+        responses={200: LoanSerializer},
+        tags=["Rotas de loans"],
+    )
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
+    @extend_schema(
+        operation_id="Loan",
+        summary="Cria um novo emprestimos",
+        description="Cria um novo emprestimos. Está rota está limitada, somente adiministradores tem accesso.",
+        responses={200: LoanSerializer},
+        tags=["Rotas de loans"],
+    )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+
 
 class LoanDetailView(UpdateAPIView):
     authentication_classes = [JWTAuthentication]
@@ -79,17 +100,20 @@ class LoanDetailView(UpdateAPIView):
     serializer_class = LoanSerializer
     queryset = Loan.objects.all()
 
+    allowed_methods = ["patch"]
+
+    @extend_schema(
+        operation_id="Loan",
+        summary="Devolução de um de um livro alocado",
+        description="Faz  a devolução de um livro alcocado. Está rota está limitada, somente adiministradores tem accesso.",
+        responses={200: LoanSerializer},
+        tags=["Rotas de loans"],
+    )
     def patch(self, request, *args, **kwargs):
         returned_at = request.data.get("returned_at", None)
         if returned_at is None:
             request.data["returned_at"] = timezone.now()
         update = self.partial_update(request, *args, **kwargs)
-        loan = self.get_object()
-        devolution_event(loan)
-        return update
-
-    def put(self, request, *args, **kwargs):
-        update = self.update(request, *args, **kwargs)
         loan = self.get_object()
         devolution_event(loan)
         return update
