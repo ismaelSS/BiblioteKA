@@ -8,5 +8,5 @@ urlpatterns = [
     path("books/", views.BoookViews.as_view()),
     path("books/<int:pk>/", views.BoookDetailViews.as_view()),
     path("books/<int:pk>/copies/", CopyView.as_view()),
-    path("books/copies/<int:pk>", CopyDetailView.as_view()),
+    path("books/copies/<int:pk>/", CopyDetailView.as_view()),
 ]
